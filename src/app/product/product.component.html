@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <h2 class="text-center">Product List</h2>
+
+  <div class="mx-auto" style="max-width: 800px;">
+    <table class="table table-bordered table-striped table-sm">
+      <thead class="thead-dark">
+        <tr>
+          <th style="background-color: #343a40; color: #fff; width: 40px;">ID</th>
+          <th style="background-color: #343a40; color: #fff; width: 100px;">Name</th>
+          <th style="background-color: #343a40; color: #fff; width: 50px;">Quantity</th>
+          <th style="background-color: #343a40; color: #fff; width: 50px;">Price</th>
+          <!-- New column for actions -->
+          <th style="background-color: #343a40; color: #fff; width: 80px;" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.id }}</td>
+          <td>
+            <span *ngIf="!product.editing">{{ product.name }}</span>
+            <input *ngIf="product.editing" [(ngModel)]="product.name" class="form-control" />
+          </td>
+          <td>
+            <span *ngIf="!product.editing">{{ product.quantity }}</span>
+            <input *ngIf="product.editing" [(ngModel)]="product.quantity" class="form-control" />
+          </td>
+          <td>
+            <span *ngIf="!product.editing">{{ product.price }}</span>
+            <input *ngIf="product.editing" [(ngModel)]="product.price" class="form-control" />
+          </td>
+          <!-- Buttons for update and delete -->
+          <td class="text-center">
+            <div class="d-flex align-items-center justify-content-center">
+              <button class="btn btn-primary btn-sm me-1" (click)="updateProduct(product)">
+                {{ product.editing ? 'Save' : 'Edit' }}
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="deleteProduct(product.id)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
